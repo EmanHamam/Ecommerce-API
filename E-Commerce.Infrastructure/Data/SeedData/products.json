@@ -1,0 +1,212 @@
+[
+    {
+     
+        "ProductName": "Floral Hawaiian Shirt",
+        "Description": "The Gildan Ultra Cotton T-shirt is made from substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton. This classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.",
+        "BrandID": 1,
+        "Price": 24,
+        "StockQuantity": 3,
+        "ImageURL": "f1.jpg",
+        "CategoryID": 1
+    },
+    {
+        
+        "ProductName": "Hawaiian Shirts Casual",
+        "Description": "The Gildan Ultra Cotton T-shirt is made from substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton. This classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.",
+        "BrandID": 1,
+        "Price": 30,
+        "StockQuantity": 0,
+        "ImageURL": "f2.jpg",
+        "CategoryID": 1
+    },
+    {
+       
+        "ProductName": "Summer Tropical Shirts",
+        "Description": "The Gildan Ultra Cotton T-shirt is made from substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton. This classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.",
+       "BrandID": 1,
+        "Price": 35,
+        "StockQuantity": 1,
+        "ImageURL": "f3.jpg",
+        "CategoryID": 1
+    },
+    {
+        
+        "ProductName": "Unisex Casual Aloha Floral Shirts",
+        "Description": "The Gildan Ultra Cotton T-shirt is made from substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton. This classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.",
+        "BrandID": 2,
+        "Price": 49,
+        "StockQuantity": 5,
+        "ImageURL": "f4.jpg",
+        "CategoryID": 1
+    },
+    {
+     
+        "ProductName": "Luxury Casual Hawaiian Shirt",
+        "Description": "The Gildan Ultra Cotton T-shirt is made from substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton. This classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.",
+        "BrandID": 3,
+        "Price": 20,
+        "StockQuantity": 3,
+        "ImageURL": "f5.jpg",
+        "CategoryID": 1
+    },
+    {
+       
+        "ProductName": "Legendary Whitetails Plaid Shirt",
+        "Description": "The Gildan Ultra Cotton T-shirt is made from substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton. This classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.",
+        "BrandID": 4,
+        "Price": 42,
+        "StockQuantity": 1,
+        "ImageURL": "f6.jpg",
+        "CategoryID": 1
+    },
+    {
+        
+        "ProductName": "Print Cropped Pants Vintage flowers",
+        "Description": "The Gildan Ultra Cotton T-shirt is made from substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton. This classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.",
+        "BrandID": 5,
+        "Price": 44,
+        "StockQuantity": 0,
+        "ImageURL": "f7.jpg",
+        "CategoryID": 2
+    },
+    {
+       
+        "ProductName": "Neck Ruffle Lantern Casual Blouse",
+        "Description": "The Gildan Ultra Cotton T-shirt is made from substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton. This classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.",
+       "BrandID": 6,
+        "Price": 41,
+        "StockQuantity": 5,
+        "ImageURL": "f8.jpg",
+        "CategoryID": 1
+    },
+    {
+        
+        "ProductName": "Shirt Regular Fit Oxford Solid",
+        "Description": "The Gildan Ultra Cotton T-shirt is made from substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton. This classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.",
+        "BrandID": 7,
+        "Price": 29,
+        "StockQuantity": 3,
+        "ImageURL": "n1.jpg",
+        "CategoryID": 1
+    },
+    {
+       
+        "ProductName": "Mens Button Shirts Regular Fit",
+        "Description": "The Gildan Ultra Cotton T-shirt is made from substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton. This classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.",
+        "BrandID": 8,
+        "Price": 45,
+        "StockQuantity": 5,
+        "ImageURL": "n2.jpg",
+        "CategoryID": 1
+    },
+    {
+        
+        "ProductName": "Wrinkle Free Regular Fit Stretch",
+        "Description": "The Gildan Ultra Cotton T-shirt is made from substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton. This classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.",
+        "BrandID": 9,
+        "Price": 20,
+        "StockQuantity": 3,
+        "ImageURL": "n3.jpg",
+        "CategoryID": 1
+    },
+    {
+        
+        "ProductName": "Casual Linen Beach Shirt",
+        "Description": "The Gildan Ultra Cotton T-shirt is made from substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton. This classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.",
+        "BrandID": 10,
+        "Price": 27,
+        "StockQuantity": 1,
+        "ImageURL": "n4.jpg",
+        "CategoryID": 1
+    },
+    {
+        
+        "ProductName": "Cowboy Cut Western Snap Work",
+        "Description": "The Gildan Ultra Cotton T-shirt is made from substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton. This classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.",
+        "BrandID": 11,
+        "Price": 25,
+        "StockQuantity": 3,
+        "ImageURL": "n5.jpg",
+        "CategoryID": 1
+    },
+    {
+       
+        "ProductName": "Western Denim Shirt",
+        "Description": "The Gildan Ultra Cotton T-shirt is made from substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton. This classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.",
+        "BrandID": 11,
+        "Price": 29,
+        "StockQuantity": 1,
+        "ImageURL": "n6.jpg",
+        "CategoryID": 2
+    },
+    {
+       
+        "ProductName": "Buck Camp Flannel Plaid Shirt",
+        "Description": "The Gildan Ultra Cotton T-shirt is made from substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton. This classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.",
+       "BrandID": 12,
+        "Price": 30,
+        "StockQuantity": 5,
+        "ImageURL": "n7.jpg",
+        "CategoryID": 1
+    },
+    {
+        
+        "ProductName": "ECLO Stria Expandable-Waist",
+        "Description": "The Gildan Ultra Cotton T-shirt is made from substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton. This classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.",
+        "BrandID": 13,
+        "Price": 47,
+        "StockQuantity": 1,
+        "ImageURL": "n8.jpg",
+        "CategoryID": 1
+    },
+    {
+      
+        "ProductName": "HRITHIK ROSHAN RUNNING SHOES",
+        "Description": "The Gildan Ultra Cotton T-shirt is made from substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton. This classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.",
+        "BrandID": 14,
+        "Price": 20,
+        "StockQuantity": 4,
+        "ImageURL": "p1.jpg",
+        "CategoryID": 3
+    },
+    {
+       
+        "ProductName": "Hrithik Roshan Men Grey",
+        "Description": "The Gildan Ultra Cotton T-shirt is made from substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton. This classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.",
+        "BrandID": 14,
+        "Price": 22,
+        "StockQuantity": 0,
+        "ImageURL": "p2.jpg",
+        "CategoryID": 3
+    },
+    {
+        
+        "ProductName": "Active Men Socks",
+        "Description": "The Gildan Ultra Cotton T-shirt is made from substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton. This classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.",
+        "BrandID": 14,
+        "Price": 10,
+        "StockQuantity": 5,
+        "ImageURL": "p3.jpg",
+        "CategoryID": 3
+    },
+    {
+        
+        "ProductName": "Reebok All Terrain Craze",
+        "Description": "The Gildan Ultra Cotton T-shirt is made from substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton. This classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.",
+        "BrandID": 15,
+        "Price": 22,
+        "StockQuantity": 4,
+        "ImageURL": "p4.jpg",
+        "CategoryID": 3
+    },
+    {
+       
+        "ProductName": "Black Analog Watch",
+        "Description": "The Gildan Ultra Cotton T-shirt is made from substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton. This classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.",
+        "BrandID": 16,
+        "Price": 22,
+        "StockQuantity": 3,
+        "ImageURL": "s1.jpg",
+        "CategoryID": 4
+    }
+]
