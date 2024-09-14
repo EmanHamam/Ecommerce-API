@@ -15,6 +15,7 @@ using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using AutoMapper;
 using Stripe;
+using E_Commerce.Extension;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -143,16 +144,14 @@ builder.Services.AddScoped<IPaymentServices, PaymentServices>();
 
 
 var app = builder.Build();
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var context= services.GetRequiredService<ApplicationDbContext>();
-    var usermanager = services.GetRequiredService<UserManager<ApplicationUser>>();
-
-
-    await StoredContextSeed.SeedAsync(context);
-    await IdentitySeed.SeedUserAsync(usermanager);
-}
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
+//    var context= services.GetRequiredService<ApplicationDbContext>();
+//    var usermanager = services.GetRequiredService<UserManager<ApplicationUser>>();
+//    await StoredContextSeed.SeedAsync(context);
+//    await IdentitySeed.SeedUserAsync(usermanager);
+//}
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -170,5 +169,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.CreateDbIfNotExists();
 app.Run();
