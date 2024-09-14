@@ -1,12 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Linq;
 namespace E_Commerce.Attributes
 {
-    public class AllowedExtentionsAttribute : ValidationAttribute
+    public class AllowedExtensionsAttribute : ValidationAttribute
     {
         private readonly string _allowedExtensions;
 
-        public AllowedExtentionsAttribute(string allowedExtensions)
+        public AllowedExtensionsAttribute(string allowedExtensions)
         {
             _allowedExtensions = allowedExtensions;
         }

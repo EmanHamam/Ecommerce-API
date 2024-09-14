@@ -33,31 +33,7 @@ namespace E_Commerce.Infrastructure.Repositories.Services
 
         }
 
-        //public async Task<ResponseDto> GetAllProducts()
-        //{
-        //    var Products= await _context.Products
-        //        .Include(p => p.Category)
-        //        .ToListAsync();
-        //    if (!Products.Any())
-        //    {
-        //        return new ResponseDto
-        //        {
-        //            StatusCode = 400,
-        //            IsSucceeded = false,
-        //            DisplayMessage = "There are no products."
-        //        };
-        //    }
 
-        //    var ProductsDto = _mapper.Map<List<ProductDto>>(Products);
-
-        //    return new ResponseDto
-        //    {
-        //        StatusCode = 200,
-        //        IsSucceeded = true,
-        //        Result = ProductsDto,
-                
-        //    };
-        //}
         public async Task<ResponseDto> GetAllProducts(ProductParams? productParams)
         {
             var result = new ReturnProductDto();
@@ -66,8 +42,11 @@ namespace E_Commerce.Infrastructure.Repositories.Services
             {
                 productParams.PageNumber = 1;
             }
+
+            // Query for products including Category and Brand
             var query = _context.Products
                 .Include(p => p.Category)
+                .Include(p => p.Brand)
                 .AsNoTracking();
 
             result.TotalItems = await query.CountAsync();
@@ -78,7 +57,6 @@ namespace E_Commerce.Infrastructure.Repositories.Services
                 .Take(productParams.PageSize)
                 .ToListAsync();
 
-            
             if (pagedQuery == null || !pagedQuery.Any())
             {
                 return new ResponseDto
@@ -89,11 +67,37 @@ namespace E_Commerce.Infrastructure.Repositories.Services
                 };
             }
 
-            
-            result.ProductDtos = _mapper.Map<List<ProductDto>>(pagedQuery);
+            // Get all product IDs from the current page
+            var productIds = pagedQuery.Select(p => p.ProductID).ToList();
+
+            var reviews = await _context.Reviews
+        .Where(r => productIds.Contains((int)r.ProductID)) // Cast to int after ensuring it's not null
+        .Where(r => r.ProductID != null) // Filter out null ProductID values
+        .GroupBy(r => (int)r.ProductID)  // Safely cast to int
+        .Select(g => new
+        {
+            ProductID = g.Key,
+            AverageRating = g.Average(r => r.Rating),
+            NumOfReviews = g.Count()
+        })
+        .ToListAsync();
+
+
+            // Map products and calculate ratings
+            var productDtos = pagedQuery.Select(product =>
+            {
+                var productDto = _mapper.Map<ProductDto>(product);
+
+                // Find the rating for this product
+                var reviewData = reviews.FirstOrDefault(r => r.ProductID == product.ProductID);
+                productDto.Rating = reviewData?.AverageRating ?? 0; // If no reviews, set rating to 0
+
+                return productDto;
+            }).ToList();
+
+            result.ProductDtos = productDtos;
             result.PageNumber = productParams.PageNumber;
             result.PageSize = productParams.PageSize;
-
 
             return new ResponseDto
             {
@@ -107,6 +111,7 @@ namespace E_Commerce.Infrastructure.Repositories.Services
             var Product = await _context.Products
                 .Where(p => p.ProductID == id)
                .Include(p => p.Category)
+               .Include(p=>p.Brand)
                .FirstOrDefaultAsync();
             if(Product == null)
             {
@@ -128,14 +133,15 @@ namespace E_Commerce.Infrastructure.Repositories.Services
         }
         public async Task<ResponseDto> GetProductDetailsById(int prdId)
         {
-            var ProductDetails = await _context.ProductDetails
+            var productDetails = await _context.ProductDetails
                 .Include(pd => pd.Product)
-                .ThenInclude(p=>p!.Category)
+                .ThenInclude(p => p.Brand)
+                .Include(pd => pd.Product)
+                .ThenInclude(p => p.Category) 
                 .Where(pd => pd.ProducID == prdId)
                 .FirstOrDefaultAsync();
 
-           
-            if (ProductDetails == null)
+            if (productDetails == null)
             {
                 return new ResponseDto
                 {
@@ -144,48 +150,26 @@ namespace E_Commerce.Infrastructure.Repositories.Services
                     DisplayMessage = $"Product with ID {prdId} not found"
                 };
             }
-            var ProductDto = _mapper.Map<ProductDetailsDto>(ProductDetails);
-            var reviews=  await _context.Reviews.Where(r => r.ProductID == prdId).ToListAsync();
-            var rate = await _context.Reviews.Where(r => r.ProductID == prdId).AverageAsync(r => r.Rating);
 
-            ProductDto.numOfReviews = reviews.Count;
-            ProductDto.Rating = rate;
+            var productDto = _mapper.Map<ProductDetailsDto>(productDetails);
+
+            // Fetch reviews and calculate average rating
+            var reviews = await _context.Reviews.Where(r => r.ProductID == prdId).ToListAsync();
+            var rate = reviews.Any() ? reviews.Average(r => r.Rating) : 0; 
+
             
+            productDto.numOfReviews = reviews.Count;
+            productDto.Rating = rate;
+
             return new ResponseDto
             {
                 StatusCode = 200,
                 IsSucceeded = true,
-                Result = ProductDto
+                Result = productDto
             };
         }
 
-        //public async Task<ResponseDto> GetProductsByCategoryId(int categoryId)
-        //{
-        //    var Products=await _context.Products
-        //        .Where(p => p.CategoryID == categoryId)
-        //        .Include(c=>c.Category)
-        //        .ToListAsync();
-        //    if (Products == null||Products.Count==0)
-        //    {
-        //        return new ResponseDto
-        //        {
-        //            StatusCode = 400,
-        //            IsSucceeded = false,
-        //            DisplayMessage = "no Products were found for this Category"
-        //        };
-        //    }
 
-        //    var ProductsDto = _mapper.Map<List<ProductDto>>(Products);
-
-        //    return new ResponseDto
-        //    {
-        //        StatusCode = 200,
-        //        IsSucceeded = true,
-        //        Result = ProductsDto,
-
-        //    };
-
-        //}
         public async Task<ResponseDto> GetProductsByCategoryId(int categoryId, ProductParams? productParams)
         {
             var result = new ReturnProductDto();
@@ -194,12 +178,14 @@ namespace E_Commerce.Infrastructure.Repositories.Services
             {
                 productParams.PageNumber = 1;
             }
+
+            // Get products filtered by category
             var query = _context.Products
-                 .Where(p => p.CategoryID == categoryId)
+                .Where(p => p.CategoryID == categoryId)
                 .Include(p => p.Category)
                 .AsNoTracking();
 
-
+            // Count total items for pagination
             result.TotalItems = await query.CountAsync();
 
             // Apply pagination
@@ -207,7 +193,6 @@ namespace E_Commerce.Infrastructure.Repositories.Services
                 .Skip((productParams.PageNumber - 1) * productParams.PageSize)
                 .Take(productParams.PageSize)
                 .ToListAsync();
-
 
             if (pagedQuery == null || !pagedQuery.Any())
             {
@@ -219,10 +204,37 @@ namespace E_Commerce.Infrastructure.Repositories.Services
                 };
             }
 
+            // Get all product IDs from the current page
+            var productIds = pagedQuery.Select(p => p.ProductID).ToList();
 
-            result.ProductDtos = _mapper.Map<List<ProductDto>>(pagedQuery);
+            // Fetch reviews and calculate average rating and number of reviews per product
+            var reviews = await _context.Reviews
+                .Where(r => productIds.Contains((int)r.ProductID)) // Cast to int after ensuring it's not null
+                .Where(r => r.ProductID != null) // Filter out null ProductID values
+                .GroupBy(r => (int)r.ProductID)  // Safely cast to int
+                .Select(g => new
+                {
+                    ProductID = g.Key,
+                    AverageRating = g.Average(r => r.Rating),
+                    NumOfReviews = g.Count()
+                })
+                .ToListAsync();
+
+            // Map products and calculate ratings
+            var productDtos = pagedQuery.Select(product =>
+            {
+                var productDto = _mapper.Map<ProductDto>(product);
+
+                // Find the rating for this product
+                var reviewData = reviews.FirstOrDefault(r => r.ProductID == product.ProductID);
+                productDto.Rating = reviewData?.AverageRating ?? 0; // If no reviews, set rating to 0
+
+                return productDto;
+            }).ToList();
+
+            result.ProductDtos = productDtos;
             result.PageNumber = productParams.PageNumber;
-            result.PageSize=productParams.PageSize;
+            result.PageSize = productParams.PageSize;
 
             return new ResponseDto
             {
@@ -230,9 +242,6 @@ namespace E_Commerce.Infrastructure.Repositories.Services
                 IsSucceeded = true,
                 Result = result,
             };
-
-
-
         }
 
         public async Task<ResponseDto> GetProductsByBrand(string brand)
@@ -459,10 +468,6 @@ namespace E_Commerce.Infrastructure.Repositories.Services
                     var Image = Path.Combine(_imgPath, image3);
                     File.Delete(Image);
                 }
-                //DeleteImageIfExists(image1);
-                //DeleteImageIfExists(image2);
-                //DeleteImageIfExists(image3);
-
                 var res = _mapper.Map<ProductDetails>(dto);
                 res.SmallImg1 = productDetails.SmallImg1;
                 res.SmallImg2 = productDetails.SmallImg2;

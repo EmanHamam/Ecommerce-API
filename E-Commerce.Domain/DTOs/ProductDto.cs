@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-
 namespace E_Commerce.Domain.DTOs
 {
     public class ProductDto
@@ -15,13 +14,14 @@ namespace E_Commerce.Domain.DTOs
         public int ProductID { get; set; }
         public string ProductName { get; set; }
         public decimal Price { get; set; }
-        public int StockQuantity { get; set; }
+        public int StockQuantity { get; set;}
         public string ImageURL { get; set; }
-        public string CategoryName { get; set; }
+        public string CategoryName { get; set;}
         public string BrandName { get; set; }
-
         public int CategoryId { get; set; }
         public int? Frequency {  get; set; }
+        public double Rating { get; set; }
+
 
     }
     public class ProductDetailsDto
@@ -36,10 +36,8 @@ namespace E_Commerce.Domain.DTOs
         public string? Description { get; set; }
         public decimal Price { get; set; }
         public int StockQuantity { get; set; }
-        
         public string CategoryName { get; set; }
         public string BrandName { get; set; }
-
         public int CategoryId { get; set; }
         public double Rating { get; set; }
         public int numOfReviews {  get; set; }
@@ -84,8 +82,9 @@ namespace E_Commerce.Domain.DTOs
         public int BrandId { get; set; }
 
 
-        //[AllowedExtentionsAtrribute(FileSettings._AllowedExtentions)
-        //    ,MaxFileSize(FileSettings._MaxFileSizeInBytes)]
+        //[AllowedExtensionsAttribute(FileSettings._AllowedExtentions)
+        //    , MaxFileSize(FileSettings._MaxFileSizeInBytes)]
+
         public IFormFile ImageURL { get; set; }
         
     }

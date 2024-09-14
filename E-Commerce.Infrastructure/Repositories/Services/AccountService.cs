@@ -26,15 +26,19 @@ namespace E_Commerce.Infrastructure.Repositories.Services
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
+        private readonly ICartRepository _cartRepository;
 
 
-        public AccountService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration _configuration, IHttpContextAccessor httpContextAccessor, IMapper mapper)
+        public AccountService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, 
+            IConfiguration _configuration,IHttpContextAccessor httpContextAccessor,
+            IMapper mapper,ICartRepository cartRepository)
         {
             this.userManager = userManager;
             _roleManager = roleManager;
             this._configuration = _configuration;
             this._httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
+            _cartRepository = cartRepository;
         }
         public async Task<AuthModel> RegisterAsync(RegisterDto model)
         {
@@ -48,16 +52,19 @@ namespace E_Commerce.Infrastructure.Repositories.Services
                 return new AuthModel { Message = "Username is already Registered!" };
 
             }
+           
             var user=new ApplicationUser
             { 
                 UserName = model.Username,
                 Email = model.Email,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-            
+               
+
             };
-           var result= await userManager.CreateAsync(user,model.Password);
-            if(!result.Succeeded)
+           
+            var result= await userManager.CreateAsync(user,model.Password);
+            if (!result.Succeeded)
             {
                 var errors=string.Empty;
                 foreach (var error in result.Errors)
@@ -66,16 +73,37 @@ namespace E_Commerce.Infrastructure.Repositories.Services
                 }
                 return new AuthModel { Message = errors };
             }
+
+            //create cart
+            if (user != null)
+            {
+                var checkResult = await _cartRepository.CreateCart(user.Id);
+                if (!checkResult.IsSucceeded)
+                {
+                    new AuthModel { Message = "Faild to create cart" };
+                }
+
+                var cart = checkResult.Result as ShoppingCart;
+                user.CartId = cart.ShoppingCartID;
+                var updateResult = await userManager.UpdateAsync(user);
+
+                if (!updateResult.Succeeded)
+                {
+                    var errors = string.Join(", ", updateResult.Errors.Select(e => e.Description));
+                    return new AuthModel { Message = $"Failed to update user with cart: {errors}" };
+                }
+            }
             await userManager.AddToRoleAsync(user, "User");
             var Token= await CreateToken (user);
             return new AuthModel
             {
                 Email = user.Email,
-               // TokenExpiration = Token.ValidTo,
                 IsAuthenticated = true,
                 Roles = new List<string> { "User" },
                 Token = new JwtSecurityTokenHandler().WriteToken(Token),
                 UserName = user.UserName,
+                CartID=user.CartId,
+                
             
             };
         }
@@ -93,11 +121,10 @@ namespace E_Commerce.Infrastructure.Repositories.Services
 
             authModel.IsAuthenticated = true;
             authModel.Token = new JwtSecurityTokenHandler().WriteToken(Token);
-           // authModel.TokenExpiration = Token.ValidTo;
             authModel.Email = user.Email;
             authModel.UserName = user.UserName;
             authModel.Roles = roles.ToList();
-
+            authModel.CartID = user.CartId;
 
             if(user.RefreshTokens.Any(t=>t.IsActive))
             {

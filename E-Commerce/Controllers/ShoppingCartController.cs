@@ -64,11 +64,11 @@ namespace E_Commerce.Controllers
 
         }
         [HttpPost("CreateCart")]
-        public async Task<IActionResult> CreateCart()
+        public async Task<IActionResult> CreateCart(string userId)
         {
             if (ModelState.IsValid)
             {
-                _responseDTO = await _cartRepository.CreateCart();
+                _responseDTO = await _cartRepository.CreateCart(userId);
                 if (_responseDTO.IsSucceeded)
                 {
                     return StatusCode(_responseDTO.StatusCode, _responseDTO.Result);

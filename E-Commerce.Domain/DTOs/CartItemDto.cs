@@ -8,13 +8,9 @@ namespace E_Commerce.Domain.DTOs
 {
     public class CartItemDto
     {
-
         public int ShoppingCartID { get; set; }
         public int ProductID { get; set; }
-        public decimal Price { get; set; }
-
         public int Quantity { get; set; }
-        public bool inTheCart { get; set; } = false;
     }
     public class ReturnCartItemDto
     {

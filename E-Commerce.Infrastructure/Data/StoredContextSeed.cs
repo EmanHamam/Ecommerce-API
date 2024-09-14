@@ -55,16 +55,16 @@ namespace E_Commerce.Infrastructure.Data
                 await context.SaveChangesAsync();
             }
 
-            //if (!context.Reviews.Any())
-            //{
-            //    var reviewsData = File.ReadAllText("../E-Commerce.Infrastructure/Data/SeedData/reviews.json");
-            //    var reviews = JsonSerializer.Deserialize<List<Review>>(reviewsData);
-            //    foreach (var item in reviews)
-            //    {
-            //        context.Reviews.Add(item);
-            //    }
-            //    await context.SaveChangesAsync();
-            //}
+            if (!context.Reviews.Any())
+            {
+                var reviewsData = File.ReadAllText("../E-Commerce.Infrastructure/Data/SeedData/reviews.json");
+                var reviews = JsonSerializer.Deserialize<List<Review>>(reviewsData);
+                foreach (var item in reviews)
+                {
+                    context.Reviews.Add(item);
+                }
+                await context.SaveChangesAsync();
+            }
             if (!context.DeliveryMethod.Any())
             {
                 var DeliveryMethodData = File.ReadAllText("../E-Commerce.Infrastructure/Data/SeedData/delivery.json");

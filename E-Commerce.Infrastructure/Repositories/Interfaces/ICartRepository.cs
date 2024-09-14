@@ -14,7 +14,7 @@ namespace E_Commerce.Infrastructure.Repositories.Interfaces
         public Task<ResponseDto> GetPopularSalledProducts();
 
         //public Task<ResponseDto> CreateCart(CartDto dto);
-        public Task<ResponseDto> CreateCart();
+        public Task<ResponseDto> CreateCart(string userId);
 
         public Task<ResponseDto> UpdateCart(int id, UpdateCartDto dto);
         public Task<ResponseDto> RemoveFromCart(int cartitemId);

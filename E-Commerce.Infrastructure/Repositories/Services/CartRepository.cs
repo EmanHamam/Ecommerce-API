@@ -161,7 +161,7 @@ namespace E_Commerce.Infrastructure.Repositories.Services
         //    };
 
         //}
-        public async Task<ResponseDto> CreateCart()
+        public async Task<ResponseDto> CreateCart(string userId)
         {
             //var currentUserId = await GetCurrentUserAsync();
             //var user = await _userManager.FindByIdAsync(currentUserId);
@@ -176,7 +176,7 @@ namespace E_Commerce.Infrastructure.Repositories.Services
             //}
             var cart = new ShoppingCart();
             //cart.CartItems = _mapper.Map<List<CartItem>>(items);
-            // cart.UserID = currentUserId;
+            cart.UserID = userId;
             
             await _context.ShoppingCarts.AddAsync(cart);
             var effectedRows = await _context.SaveChangesAsync();
@@ -186,7 +186,7 @@ namespace E_Commerce.Infrastructure.Repositories.Services
                 {
                     StatusCode = 201,
                     IsSucceeded = true,
-                    Result = _mapper.Map<CartDto>(cart)
+                    Result = cart
                 };
             }
             return new ResponseDto

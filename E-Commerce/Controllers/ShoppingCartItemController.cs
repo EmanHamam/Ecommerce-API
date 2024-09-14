@@ -48,6 +48,21 @@ namespace E_Commerce.Controllers
             return BadRequest(ModelState);
 
         }
+        [HttpGet("GetItemsInCartByUserId/{id}")]
+        public async Task<IActionResult> GetItemsInCartByUserId(string id)
+        {
+            if (ModelState.IsValid)
+            {
+                _responseDTO = await _cartItemCpository.GetItemsInCartByUserId(id);
+                if (_responseDTO.IsSucceeded)
+                {
+                    return StatusCode(_responseDTO.StatusCode, _responseDTO.Result);
+                }
+                return StatusCode(_responseDTO.StatusCode, _responseDTO.DisplayMessage);
+            }
+            return BadRequest(ModelState);
+
+        }
         [HttpPost("AddItemToCart")]
         public async Task<IActionResult> AddItemToCart(CartItemDto itemDto)
         {
@@ -84,6 +99,21 @@ namespace E_Commerce.Controllers
             if (ModelState.IsValid)
             {
                 _responseDTO = await _cartItemCpository.RemoveCartItem(id);
+                if (_responseDTO.IsSucceeded)
+                {
+                    return StatusCode(_responseDTO.StatusCode, _responseDTO.Result);
+                }
+                return StatusCode(_responseDTO.StatusCode, _responseDTO.DisplayMessage);
+            }
+            return BadRequest(ModelState);
+
+        }
+        [HttpDelete("RemoveCartItemByProductId")]
+        public async Task<IActionResult> RemoveCartItemByProductId(int cartId, int prdId)
+        {
+            if (ModelState.IsValid)
+            {
+                _responseDTO = await _cartItemCpository.RemoveCartItemByProductId(cartId,prdId);
                 if (_responseDTO.IsSucceeded)
                 {
                     return StatusCode(_responseDTO.StatusCode, _responseDTO.Result);

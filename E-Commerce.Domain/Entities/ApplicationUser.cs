@@ -13,6 +13,7 @@ namespace E_Commerce.Domain.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+        public  int? CartId { get; set; }
         public Address Address { get; set; }
        
         [JsonIgnore]

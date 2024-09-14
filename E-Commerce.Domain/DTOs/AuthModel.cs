@@ -14,7 +14,7 @@ namespace E_Commerce.Domain.DTOs
 
         public bool IsAuthenticated { get; set; } = false;
         public string? UserName { get; set; }
-
+        public int? CartID { get; set; }
         public string? Email { get; set; }
         public List<string>? Roles { get; set; }
         public string? Token { get; set; }
